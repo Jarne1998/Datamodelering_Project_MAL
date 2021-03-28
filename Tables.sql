@@ -5,6 +5,42 @@
 
 -- [Project_MAL]
 
+IF OBJECT_ID('[Project_MAL].[Gebruiker]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[Gebruiker];
+
+IF OBJECT_ID('[Project_MAL].[Author]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[Author];
+
+IF OBJECT_ID('[Project_MAL].[VoiceActor]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[VoiceActor];
+
+IF OBJECT_ID('[Project_MAL].[Collection]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[Collection];
+
+IF OBJECT_ID('[Project_MAL].[Manga]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[Manga];
+
+IF OBJECT_ID('[Project_MAL].[Studio]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[Studio];
+
+IF OBJECT_ID('[Project_MAL].[Anime]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[Anime];
+
+IF OBJECT_ID('[Project_MAL].[Character]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[Character];
+
+IF OBJECT_ID('[Project_MAL].[VoiceActorAired]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[VoiceActorAired];
+
+IF OBJECT_ID('[Project_MAL].[AnimeCollection]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[AnimeCollection];
+
+IF OBJECT_ID('[Project_MAL].[Genre]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[Genre];
+
+DROP SCHEMA [Project_MAL];
+GO
+
 CREATE SCHEMA [Project_MAL];
 GO
 
@@ -29,7 +65,7 @@ CREATE TABLE [Project_MAL].[Author]
 	[lastname] varchar(20) NOT NULL,
 	[birthday] date NOT NULL,
 
-	CONSTRAINT [PK_author]
+	CONSTRAINT [PK_Author]
 		PRIMARY KEY ([authorId])
 );
 
@@ -41,7 +77,7 @@ CREATE TABLE [Project_MAL].[VoiceActor]
 	[birthday] date NOT NULL,
 	[language] varchar(20) NOT NULL,
 
-	CONSTRAINT [PK_voiceActor]
+	CONSTRAINT [PK_VoiceActor]
 		PRIMARY KEY ([voiceActorId])
 );
 
@@ -64,7 +100,7 @@ CREATE TABLE [Project_MAL].[Manga]
 	[name] varchar(20) NOT NULL,
 	[chapters] date NOT NULL,
 
-	CONSTRAINT [PK_author]
+	CONSTRAINT [PK_Manga]
 		PRIMARY KEY ([mangaId]),
 	CONSTRAINT [FK_Project_MAL_Author]
 		FOREIGN KEY ([authorId])
@@ -72,6 +108,21 @@ CREATE TABLE [Project_MAL].[Manga]
 	CONSTRAINT [FK_Project_MAL_Collection]
 		FOREIGN KEY ([collectionId])
 		REFERENCES [Project_MAL].[Collection](collectionId)
+);
+
+CREATE TABLE [Project_MAL].[MangaCollection]
+(
+	[mangaCollectionId] int IDENTITY(1,1) NOT NULL,
+	[mangaId] int NULL,
+	[collectionId] int NULL,
+	CONSTRAINT [PK_MangaCollection]
+		PRIMARY KEY ([mangaCollectionId])
+--	CONSTRAINT [FK_Manga]
+--		FOREIGN KEY ([mangaId])
+--		REFERENCES [Project_MAL].[Anime](animeId),
+--	CONSTRAINT [FK_Collection]
+--		FOREIGN KEY ([collectionId])
+--		REFERENCES [Project_MAL].[Collection](collectionId)
 );
 
 CREATE TABLE [Project_MAL].[Studio]
@@ -113,7 +164,7 @@ CREATE TABLE [Project_MAL].[Character]
 	[age] int NOT NULL,
 	[bloodtype] varchar(20),
 
-	CONSTRAINT [PK_character]
+	CONSTRAINT [PK_Character]
 		PRIMARY KEY ([characterId]),
 	CONSTRAINT [FK_Project_MAL_Anime]
 		FOREIGN KEY ([animeId])
@@ -130,7 +181,7 @@ CREATE TABLE [Project_MAL].[VoiceActorAired]
 	[voiceActorId] int,
 	[date] date NOT NULL,
 
-	CONSTRAINT [PK_voiceActorAired]
+	CONSTRAINT [PK_VoiceActorAired]
 		PRIMARY KEY ([voiceActorAiredId]),
 	CONSTRAINT [FK_Project_MAL_Character]
 		FOREIGN KEY ([characterId])
@@ -165,8 +216,8 @@ CREATE TABLE [Project_MAL].[Genre]
 		PRIMARY KEY ([genreId]),
 	CONSTRAINT [FK_Manga]
 		FOREIGN KEY ([mangaId])
-		REFERENCES [Project_MAL].[Manga](mangaId),
-	CONSTRAINT [FK_Anime]
-		FOREIGN KEY ([animeId])
-		REFERENCES [Project_MAL].[Anime](animeId)
+		REFERENCES [Project_MAL].[Manga](mangaId)
+--	CONSTRAINT [FK_Anime]
+--		FOREIGN KEY ([animeId])
+--		REFERENCES [Project_MAL].[Anime](animeId)
 );
