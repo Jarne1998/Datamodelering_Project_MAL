@@ -38,6 +38,9 @@ IF OBJECT_ID('[Project_MAL].[AnimeCollection]', 'U') IS NOT NULL
 IF OBJECT_ID('[Project_MAL].[Genre]', 'U') IS NOT NULL
     DROP TABLE [Project_MAL].[Genre];
 
+IF OBJECT_ID('[Project_MAL].[MangaCollection]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[MangaCollection];
+
 DROP SCHEMA [Project_MAL];
 GO
 
@@ -112,17 +115,17 @@ CREATE TABLE [Project_MAL].[Manga]
 
 CREATE TABLE [Project_MAL].[MangaCollection]
 (
-	[mangaCollectionId] int IDENTITY(1,1) NOT NULL,
-	[mangaId] int NULL,
-	[collectionId] int NULL,
-	CONSTRAINT [PK_MangaCollection]
-		PRIMARY KEY ([mangaCollectionId])
---	CONSTRAINT [FK_Manga]
---		FOREIGN KEY ([mangaId])
---		REFERENCES [Project_MAL].[Anime](animeId),
---	CONSTRAINT [FK_Collection]
---		FOREIGN KEY ([collectionId])
---		REFERENCES [Project_MAL].[Collection](collectionId)
+    [mangaCollectionId] int IDENTITY(1,1) NOT NULL,
+    [mangaId] int NULL,
+    [collectionId] int NULL,
+    CONSTRAINT [PK_MangaCollection]
+        PRIMARY KEY ([mangaCollectionId]),
+    CONSTRAINT [FK_MangaCollection]
+        FOREIGN KEY ([mangaId])
+        REFERENCES [Project_MAL].[Manga](mangaId),
+    CONSTRAINT [FK_CollectionManga]
+        FOREIGN KEY ([collectionId])
+        REFERENCES [Project_MAL].[Collection](collectionId)
 );
 
 CREATE TABLE [Project_MAL].[Studio]
@@ -148,7 +151,7 @@ CREATE TABLE [Project_MAL].[Anime]
 	[licensers] varchar(40) NULL,
 	CONSTRAINT [PK_Anime]
 		PRIMARY KEY ([animeId]),
-	CONSTRAINT [FK_Stduio]
+	CONSTRAINT [FK_Studio]
 		FOREIGN KEY ([studioId])
 		REFERENCES [Project_MAL].[Studio](studioId)
 );
@@ -216,8 +219,8 @@ CREATE TABLE [Project_MAL].[Genre]
 		PRIMARY KEY ([genreId]),
 	CONSTRAINT [FK_Manga]
 		FOREIGN KEY ([mangaId])
-		REFERENCES [Project_MAL].[Manga](mangaId)
---	CONSTRAINT [FK_Anime]
---		FOREIGN KEY ([animeId])
---		REFERENCES [Project_MAL].[Anime](animeId)
+		REFERENCES [Project_MAL].[Manga](mangaId),
+	CONSTRAINT [FK_AnimeID]
+		FOREIGN KEY ([animeId])
+		REFERENCES [Project_MAL].[Anime](animeId)
 );
