@@ -41,6 +41,12 @@ IF OBJECT_ID('[Project_MAL].[Genre]', 'U') IS NOT NULL
 IF OBJECT_ID('[Project_MAL].[MangaCollection]', 'U') IS NOT NULL
     DROP TABLE [Project_MAL].[MangaCollection];
 
+IF OBJECT_ID('[Project_MAL].[MangaGenre]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[MangaGenre];
+
+IF OBJECT_ID('[Project_MAL].[AnimeGenre]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[AnimeGenre]
+
 DROP SCHEMA [Project_MAL];
 GO
 
