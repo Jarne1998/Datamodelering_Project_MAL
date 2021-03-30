@@ -8,8 +8,16 @@ VALUES(1, 1);
 
 SET IDENTITY_INSERT Project_MAL.Collection ON
 INSERT INTO Project_MAL.Collection(collectionId, gebruikerId)
-VALUES(2, 1);
+VALUES(2, 2);
 
 SET IDENTITY_INSERT Project_MAL.Collection ON
 INSERT INTO Project_MAL.Collection(collectionId, gebruikerId)
-VALUES(3, 1);
+VALUES(3, 3);
+
+SET IDENTITY_INSERT Project_MAL.Collection ON
+INSERT INTO Project_MAL.Collection(collectionId, gebruikerId)
+VALUES(4, 4);
+
+SET IDENTITY_INSERT Project_MAL.Collection ON
+INSERT INTO Project_MAL.Collection(collectionId, gebruikerId)
+VALUES(5, 5);
