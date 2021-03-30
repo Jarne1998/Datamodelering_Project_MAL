@@ -156,7 +156,6 @@ CREATE TABLE [Project_MAL].[Anime]
 	[rating] int NULL,
 	[type] varchar(20) NOT NULL,
 	[licensers] varchar(40) NULL,
-	[type] varchar(20) NOT NULL,
 	CONSTRAINT [PK_Anime]
 		PRIMARY KEY ([animeId]),
 	CONSTRAINT [FK_Studio]
@@ -240,7 +239,7 @@ CREATE TABLE [Project_MAL].[MangaGenre]
 	[genreId] int NULL,
 	CONSTRAINT [PK_MangaGenre]
 		PRIMARY KEY ([mangaGenreId]),
-	CONSTRAINT [FK_Manga]
+	CONSTRAINT [FK_GenreManga]
 		FOREIGN KEY ([mangaId])
 		REFERENCES [Project_MAL].[Anime](animeId),
 	CONSTRAINT [FK_Genre]
@@ -255,10 +254,10 @@ CREATE TABLE [Project_MAL].[AnimeGenre]
 	[genreId] int NULL,
 	CONSTRAINT [PK_AnimeGenre]
 		PRIMARY KEY ([animeGenreId]),
-	CONSTRAINT [FK_Anime]
+	CONSTRAINT [FK_GenreAnime]
 		FOREIGN KEY ([animeId])
 		REFERENCES [Project_MAL].[Anime](animeId),
-	CONSTRAINT [FK_Genre]
+	CONSTRAINT [FK_GenreGenre]
 		FOREIGN KEY ([genreId])
 		REFERENCES [Project_MAL].[Genre](genreId)
 );
