@@ -102,7 +102,7 @@ CREATE TABLE [Project_MAL].[Manga]
 	[authorId] int,
 	[name] varchar(20) NOT NULL,
 	[chapters] date NOT NULL,
-
+	[type] varchar(20) NOT NULL,
 	CONSTRAINT [PK_Manga]
 		PRIMARY KEY ([mangaId]),
 	CONSTRAINT [FK_Project_MAL_Author]
@@ -149,6 +149,7 @@ CREATE TABLE [Project_MAL].[Anime]
 	[duration] int NOT NULL,
 	[rating] int NULL,
 	[licensers] varchar(40) NULL,
+	[type] varchar(20) NOT NULL,
 	CONSTRAINT [PK_Anime]
 		PRIMARY KEY ([animeId]),
 	CONSTRAINT [FK_Studio]
@@ -166,7 +167,6 @@ CREATE TABLE [Project_MAL].[Character]
 	[appearance] varchar(20) NOT NULL,
 	[age] int NOT NULL,
 	[bloodtype] varchar(20),
-
 	CONSTRAINT [PK_Character]
 		PRIMARY KEY ([characterId]),
 	CONSTRAINT [FK_Project_MAL_Anime]
@@ -183,7 +183,6 @@ CREATE TABLE [Project_MAL].[VoiceActorAired]
 	[characterId] int,
 	[voiceActorId] int,
 	[date] date NOT NULL,
-
 	CONSTRAINT [PK_VoiceActorAired]
 		PRIMARY KEY ([voiceActorAiredId]),
 	CONSTRAINT [FK_Project_MAL_Character]
@@ -215,6 +214,7 @@ CREATE TABLE [Project_MAL].[Genre]
 	[mangaId] int NULL,
 	[animeId] int NULL,
 	[type] varchar(40) NOT NULL,
+	[naamGenre] varchar(40) NOT NULL,
 	CONSTRAINT [PK_Genre]
 		PRIMARY KEY ([genreId]),
 	CONSTRAINT [FK_Manga]

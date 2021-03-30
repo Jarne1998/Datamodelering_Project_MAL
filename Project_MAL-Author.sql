@@ -1,5 +1,5 @@
 -- GPR LTI d1.1 Jarne Bauwens & Dennis Luyten
--- Opvullen van Manga table
+-- Opvullen van Author table
 
 -- 1)
 SET IDENTITY_INSERT Project_MAL.Author ON
