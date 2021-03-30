@@ -148,14 +148,32 @@ CREATE TABLE [Project_MAL].[Anime]
 	[status] varchar(20) NOT NULL,
 	[duration] int NOT NULL,
 	[rating] int NULL,
+	[type] varchar(20) NOT NULL,
 	[licensers] varchar(40) NULL,
 	[type] varchar(20) NOT NULL,
 	CONSTRAINT [PK_Anime]
 		PRIMARY KEY ([animeId]),
 	CONSTRAINT [FK_Studio]
 		FOREIGN KEY ([studioId])
-		REFERENCES [Project_MAL].[Studio](studioId)
+		REFERENCES [Project_MAL].[Studio](studioId),
 );
+
+CREATE TABLE [Project_MAL].[Genre]
+(
+	[genreId] int IDENTITY(1,1) NOT NULL,
+	[mangaId] int NULL,
+	[animeId] int NULL,
+	[type] varchar(40) NOT NULL,
+	CONSTRAINT [PK_Genre]
+		PRIMARY KEY ([genreId]),
+	CONSTRAINT [FK_Manga]
+		FOREIGN KEY ([mangaId])
+		REFERENCES [Project_MAL].[Manga](mangaId),
+	CONSTRAINT [FK_AnimeID]
+		FOREIGN KEY ([animeId])
+		REFERENCES [Project_MAL].[Anime](animeId)
+);
+
 
 CREATE TABLE [Project_MAL].[Character]
 (
@@ -208,19 +226,33 @@ CREATE TABLE [Project_MAL].[AnimeCollection]
 		REFERENCES [Project_MAL].[Collection](collectionId)
 );
 
-CREATE TABLE [Project_MAL].[Genre]
+CREATE TABLE [Project_MAL].[MangaGenre]
 (
-	[genreId] int IDENTITY(1,1) NOT NULL,
-	[mangaId] int NULL,
-	[animeId] int NULL,
-	[type] varchar(40) NOT NULL,
-	[naamGenre] varchar(40) NOT NULL,
-	CONSTRAINT [PK_Genre]
-		PRIMARY KEY ([genreId]),
+
+	[mangaGenreId] int IDENTITY(1,1) NOT NULL,
+	[mangaId] int NOT NULL,
+	[genreId] int NULL,
+	CONSTRAINT [PK_MangaGenre]
+		PRIMARY KEY ([mangaGenreId]),
 	CONSTRAINT [FK_Manga]
 		FOREIGN KEY ([mangaId])
-		REFERENCES [Project_MAL].[Manga](mangaId),
-	CONSTRAINT [FK_AnimeID]
+		REFERENCES [Project_MAL].[Anime](animeId),
+	CONSTRAINT [FK_Genre]
+		FOREIGN KEY ([genreId])
+		REFERENCES [Project_MAL].[Genre](genreId)
+);
+
+CREATE TABLE [Project_MAL].[AnimeGenre]
+(
+	[animeGenreId] int IDENTITY(1,1) NOT NULL,
+	[animeId] int NOT NULL,
+	[genreId] int NULL,
+	CONSTRAINT [PK_AnimeGenre]
+		PRIMARY KEY ([animeGenreId]),
+	CONSTRAINT [FK_Anime]
 		FOREIGN KEY ([animeId])
-		REFERENCES [Project_MAL].[Anime](animeId)
+		REFERENCES [Project_MAL].[Anime](animeId),
+	CONSTRAINT [FK_Genre]
+		FOREIGN KEY ([genreId])
+		REFERENCES [Project_MAL].[Genre](genreId)
 );
