@@ -168,7 +168,7 @@ CREATE TABLE [Project_MAL].[Genre]
 	[genreId] int IDENTITY(1,1) NOT NULL,
 	[mangaId] int NULL,
 	[animeId] int NULL,
-	[type] varchar(40) NOT NULL,
+	[naamGenre] varchar(40) NOT NULL,
 	CONSTRAINT [PK_Genre]
 		PRIMARY KEY ([genreId]),
 	CONSTRAINT [FK_Manga]
