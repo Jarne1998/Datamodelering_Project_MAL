@@ -33,7 +33,7 @@ VALUES(6, 6, 13);
 -- 7
 SET IDENTITY_INSERT Project_MAL.AnimeGenre on
 INSERT INTO Project_MAL.AnimeGenre(animeGenreId, animeId, genreId)
-VALUES(7, 7, 0);
+VALUES(7, 7, null);
 
 -- 8
 SET IDENTITY_INSERT Project_MAL.AnimeGenre on

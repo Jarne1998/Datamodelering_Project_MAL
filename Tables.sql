@@ -58,10 +58,10 @@ CREATE TABLE [Project_MAL].[Gebruiker]
 	[gebruikerId] int IDENTITY(1,1) NOT NULL,
 	[name] varchar(20) NOT NULL,
 	[age] int NOT NULL,
-	[email] varchar(20) NOT NULL,
+	[email] varchar(40) NOT NULL,
 	[sex] varchar(20) NULL,
 	[birthday] date NOT NULL,
-	[location] varchar NULL,
+	[location] varchar(40) NULL,
 	[joined] date NOT NULL,
 	CONSTRAINT [PK_Gebruiker]
 		PRIMARY KEY ([gebruikerId])
@@ -106,8 +106,8 @@ CREATE TABLE [Project_MAL].[Manga]
 	[mangaId] int IDENTITY(1,1) NOT NULL,
 	[collectionId] int,
 	[authorId] int,
-	[name] varchar(20) NOT NULL,
-	[chapters] date NOT NULL,
+	[name] varchar(40) NOT NULL,
+	[chapters] int NOT NULL,
 	[type] varchar(20) NOT NULL,
 	CONSTRAINT [PK_Manga]
 		PRIMARY KEY ([mangaId]),
@@ -168,13 +168,13 @@ CREATE TABLE [Project_MAL].[Genre]
 	[genreId] int IDENTITY(1,1) NOT NULL,
 	[mangaGenreId] int NULL,
 	[animeGenreId] int NULL,
-	[naamGenre] varchar(40) NOT NULL,
+	[naamGenre] varchar(100) NOT NULL,
 	CONSTRAINT [PK_Genre]
 		PRIMARY KEY ([genreId]),
-	CONSTRAINT [FK_Manga]
+	CONSTRAINT [FK_mangaGenreId]
 		FOREIGN KEY ([mangaGenreId])
 		REFERENCES [Project_MAL].[Manga](mangaId),
-	CONSTRAINT [FK_AnimeID]
+	CONSTRAINT [FK_animeGenreId]
 		FOREIGN KEY ([animeGenreId])
 		REFERENCES [Project_MAL].[Anime](animeId)
 );
