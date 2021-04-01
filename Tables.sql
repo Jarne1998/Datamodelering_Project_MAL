@@ -166,16 +166,16 @@ CREATE TABLE [Project_MAL].[Anime]
 CREATE TABLE [Project_MAL].[Genre]
 (
 	[genreId] int IDENTITY(1,1) NOT NULL,
-	[mangaId] int NULL,
-	[animeId] int NULL,
+	[mangaGenreId] int NULL,
+	[animeGenreId] int NULL,
 	[naamGenre] varchar(40) NOT NULL,
 	CONSTRAINT [PK_Genre]
 		PRIMARY KEY ([genreId]),
 	CONSTRAINT [FK_Manga]
-		FOREIGN KEY ([mangaId])
+		FOREIGN KEY ([mangaGenreId])
 		REFERENCES [Project_MAL].[Manga](mangaId),
 	CONSTRAINT [FK_AnimeID]
-		FOREIGN KEY ([animeId])
+		FOREIGN KEY ([animeGenreId])
 		REFERENCES [Project_MAL].[Anime](animeId)
 );
 

@@ -3,7 +3,7 @@
 
 -- 1)
 SET IDENTITY_INSERT Project_MAL.Genre ON
-INSERT INTO Project_MAL.Genre(genreId, mangaId, animeId, naamGenre)
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, naamGenre)
 VALUES(1, 1, 0, 'Action, Adventure, Martial Arts, Shounen, Super Power');
 
 -- 2)
@@ -13,17 +13,17 @@ VALUES(2, 2, 8, 'Action, Adventure, Comedy, Drama, Shounen, Military');
 
 -- 3)
 SET IDENTITY_INSERT Project_MAL.Genre ON
-INSERT INTO Project_MAL.Genre(genreId, mangaId, animeId, naamGenre)
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, naamGenre)
 VALUES(3, 3, 0, 'Action, Comedy, Fantasy, Magic, Shounen');
 
 -- 4)
 SET IDENTITY_INSERT Project_MAL.Genre ON
-INSERT INTO Project_MAL.Genre(genreId, mangaId, animeId, naamGenre)
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, naamGenre)
 VALUES(4, 3, 0, 'Action, Adventure, Comedy, Drama, Sci-Fi, Shounen, Supernatural');
 
 -- 5)
 SET IDENTITY_INSERT Project_MAL.Genre ON
-INSERT INTO Project_MAL.Genre(genreId, mangaId, animeId, naamGenre)
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, naamGenre)
 VALUES(5, 5, 0, 'Action, Adventure, Fantasy, Horror, Shounen');
 
 -- 6)
@@ -36,14 +36,15 @@ SET IDENTITY_INSERT Project_MAL.Genre ON
 INSERT INTO Project_MAL.Genre(genreId, mangaId, animeId, naamGenre)
 VALUES(7, 7, 9, 'Action, Demons, Historical, Shounen, Supernatural');
 
+
 -- 8)
 SET IDENTITY_INSERT Project_MAL.Genre ON
-INSERT INTO Project_MAL.Genre(genreId, mangaId, animeId, naamGenre)
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, naamGenre)
 VALUES(8, 8, 0, 'Action, Adventure, Comedy, Shounen, Super Power, Supernatural');
 
 -- 9)
 SET IDENTITY_INSERT Project_MAL.Genre ON
-INSERT INTO Project_MAL.Genre(genreId, mangaId, animeId, naamGenre)
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, naamGenre)
 VALUES(9, 9, 0, 'Fantasy, Shounen');
 
 -- 10)
