@@ -5,8 +5,8 @@
 
 -- [Project_MAL]
 
-IF OBJECT_ID('[Project_MAL].[Gebruiker]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[Gebruiker];
+IF OBJECT_ID('[Project_MAL].[User]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[User];
 
 IF OBJECT_ID('[Project_MAL].[Author]', 'U') IS NOT NULL
     DROP TABLE [Project_MAL].[Author];
@@ -232,7 +232,6 @@ CREATE TABLE [Project_MAL].[AnimeCollection]
 
 CREATE TABLE [Project_MAL].[MangaGenre]
 (
-
 	[mangaGenreId] int IDENTITY(1,1) NOT NULL,
 	[mangaId] int NOT NULL,
 	[genreId] int NULL,
