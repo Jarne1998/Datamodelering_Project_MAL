@@ -60,16 +60,13 @@ CREATE TABLE [Project_MAL].[User]
 (
 	[userId] int IDENTITY(1,1) NOT NULL,
 	[name] varchar(20) NOT NULL,
-	[age] int NOT NULL,
 	[email] varchar(40) NOT NULL,
-	[sex] varchar(20) NULL,
 	[birthday] date NOT NULL,
 	[location] varchar(40) NULL,
 	[joined] date NOT NULL,
-	[familieName] varchar(40) NOT NULL,
-	[userName] varchar(40) NOT NULL,
-
-	CONSTRAINT [PK_Gebruiker]
+	[familiename] varchar(40) NOT NULL,
+	[username] varchar(40) NOT NULL,
+	CONSTRAINT [PK_User]
 		PRIMARY KEY ([userId])
 );
 
@@ -100,6 +97,7 @@ CREATE TABLE [Project_MAL].[Collection]
 (
 	[collectionId] int IDENTITY(1,1) NOT NULL,
 	[userId] int NULL,
+	[name] varchar(40) NOT NULL,
 	CONSTRAINT [PK_Collection]
 		PRIMARY KEY ([collectionId]),
 	CONSTRAINT [FK_Gebruiker]
@@ -173,7 +171,9 @@ CREATE TABLE [Project_MAL].[Anime]
 CREATE TABLE [Project_MAL].[Genre]
 (
 	[genreId] int IDENTITY(1,1) NOT NULL,
-	[naamGenre] varchar(100) NOT NULL,
+	[mangaGenreId] int NULL,
+	[animeGenreId] int NULL,
+	[nameGenre] varchar(100) NOT NULL,
 	CONSTRAINT [PK_Genre]
 		PRIMARY KEY ([genreId]),
 );
@@ -263,7 +263,6 @@ CREATE TABLE [Project_MAL].[AnimeGenre]
 
 CREATE TABLE [Project_MAL].[NumberOfViews]
 (
-
 	[numberOfViewsId] int IDENTITY(1,1) NOT NULL,
 	[animeId] int NOT NULL,
 	[views] date NOT NULL,
