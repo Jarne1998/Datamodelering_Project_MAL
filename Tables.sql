@@ -44,8 +44,11 @@ IF OBJECT_ID('[Project_MAL].[MangaCollection]', 'U') IS NOT NULL
 IF OBJECT_ID('[Project_MAL].[MangaGenre]', 'U') IS NOT NULL
     DROP TABLE [Project_MAL].[MangaGenre];
 
-IF OBJECT_ID('[Project_MAL].[AnimeGenre]', 'U') IS NOT NULL
+IF OBJECT_ID('[Project_MAL].[AnimeGenre]', 'U') IS NOT NULL 
     DROP TABLE [Project_MAL].[AnimeGenre]
+
+IF OBJECT_ID('[Project_MAL].[NumberOfViews]', 'U') IS NOT NULL
+    DROP TABLE [Project_MAL].[MangaGenre];
 
 DROP SCHEMA [Project_MAL];
 GO
@@ -58,7 +61,6 @@ CREATE TABLE [Project_MAL].[User]
 	[userId] int IDENTITY(1,1) NOT NULL,
 	[name] varchar(20) NOT NULL,
 	[email] varchar(40) NOT NULL,
-	[sex] varchar(20) NULL,
 	[birthday] date NOT NULL,
 	[location] varchar(40) NULL,
 	[joined] date NOT NULL,
@@ -157,6 +159,8 @@ CREATE TABLE [Project_MAL].[Anime]
 	[duration] int NOT NULL,
 	[rating] int NULL,
 	[type] varchar(20) NOT NULL,
+	[rankingUpcoming] int NOT NULL,
+	[rankingAiring] int NOT NULL,
 	CONSTRAINT [PK_Anime]
 		PRIMARY KEY ([animeId]),
 	CONSTRAINT [FK_Studio]
@@ -172,12 +176,6 @@ CREATE TABLE [Project_MAL].[Genre]
 	[nameGenre] varchar(100) NOT NULL,
 	CONSTRAINT [PK_Genre]
 		PRIMARY KEY ([genreId]),
-	CONSTRAINT [FK_mangaGenreId]
-		FOREIGN KEY ([mangaGenreId])
-		REFERENCES [Project_MAL].[Manga](mangaId),
-	CONSTRAINT [FK_animeGenreId]
-		FOREIGN KEY ([animeGenreId])
-		REFERENCES [Project_MAL].[Anime](animeId)
 );
 
 
@@ -242,7 +240,7 @@ CREATE TABLE [Project_MAL].[MangaGenre]
 		PRIMARY KEY ([mangaGenreId]),
 	CONSTRAINT [FK_GenreManga]
 		FOREIGN KEY ([mangaId])
-		REFERENCES [Project_MAL].[Anime](animeId),
+		REFERENCES [Project_MAL].[Manga](mangaId),
 	CONSTRAINT [FK_Genre]
 		FOREIGN KEY ([genreId])
 		REFERENCES [Project_MAL].[Genre](genreId)
@@ -270,8 +268,7 @@ CREATE TABLE [Project_MAL].[NumberOfViews]
 	[views] date NOT NULL,
 	CONSTRAINT [PK_NumberOfViews]
 		PRIMARY KEY ([numberOfViewsId]),
-	CONSTRAINT [FK_GenreAnime]
+	CONSTRAINT [FK_AnimeGenre]
 		FOREIGN KEY ([animeId])
 		REFERENCES [Project_MAL].[Anime](animeId),
 );
-
