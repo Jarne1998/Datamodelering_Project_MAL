@@ -161,8 +161,6 @@ CREATE TABLE [Project_MAL].[Anime]
 	[duration] int NOT NULL,
 	[rating] int NULL,
 	[type] varchar(20) NOT NULL,
-	[rankingUpcoming] int NOT NULL,
-	[rankingAiring] int NOT NULL,
 	CONSTRAINT [PK_Anime]
 		PRIMARY KEY ([animeId]),
 	CONSTRAINT [FK_Studio]
