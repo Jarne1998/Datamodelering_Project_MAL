@@ -1,144 +1,61 @@
--- GPR LTI d1.1 Jarne Bauwens & Dennis Luyten
-
--- Droppen van schema/table indien nodig
--- Verwijderen van bestaande tabellen binnen het schema
-
--- [Project_MAL]
-
-IF OBJECT_ID('[Project_MAL].[User]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[User];
-
-IF OBJECT_ID('[Project_MAL].[Author]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[Author];
-
-IF OBJECT_ID('[Project_MAL].[VoiceActor]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[VoiceActor];
-
-IF OBJECT_ID('[Project_MAL].[Collection]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[Collection];
-
-IF OBJECT_ID('[Project_MAL].[Manga]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[Manga];
-
-IF OBJECT_ID('[Project_MAL].[Studio]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[Studio];
-
-IF OBJECT_ID('[Project_MAL].[Anime]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[Anime];
-
-IF OBJECT_ID('[Project_MAL].[Character]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[Character];
-
-IF OBJECT_ID('[Project_MAL].[VoiceActorAired]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[VoiceActorAired];
-
-IF OBJECT_ID('[Project_MAL].[AnimeCollection]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[AnimeCollection];
-
-IF OBJECT_ID('[Project_MAL].[Genre]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[Genre];
-
-IF OBJECT_ID('[Project_MAL].[MangaCollection]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[MangaCollection];
-
-IF OBJECT_ID('[Project_MAL].[MangaGenre]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[MangaGenre];
-
-IF OBJECT_ID('[Project_MAL].[AnimeGenre]', 'U') IS NOT NULL 
-    DROP TABLE [Project_MAL].[AnimeGenre]
-
-IF OBJECT_ID('[Project_MAL].[NumberOfViews]', 'U') IS NOT NULL
-    DROP TABLE [Project_MAL].[MangaGenre];
-
-DROP SCHEMA [Project_MAL];
-GO
-
-CREATE SCHEMA [Project_MAL];
-GO
-
-CREATE TABLE [Project_MAL].[User]
+CREATE TABLE [User]
 (
 	[userId] int IDENTITY(1,1) NOT NULL,
 	[name] varchar(20) NOT NULL,
+	[age] int NOT NULL,
 	[email] varchar(40) NOT NULL,
+	[sex] varchar(20) NULL,
 	[birthday] date NOT NULL,
 	[location] varchar(40) NULL,
 	[joined] date NOT NULL,
-	[familiename] varchar(40) NOT NULL,
-	[username] varchar(40) NOT NULL,
+	[familyName] varchar(40) NOT NULL,
+	[userName] varchar(40) NOT NULL,
 	CONSTRAINT [PK_User]
 		PRIMARY KEY ([userId])
-);
-
-CREATE TABLE [Project_MAL].[Author]
-(
-	[authorId] int IDENTITY(1,1) NOT NULL,
-	[name] varchar(20) NOT NULL,
-	[lastname] varchar(20) NOT NULL,
-	[birthday] date NOT NULL,
-
-	CONSTRAINT [PK_Author]
-		PRIMARY KEY ([authorId])
-);
-
-CREATE TABLE [Project_MAL].[VoiceActor]
-(
-	[voiceActorId] int IDENTITY(1,1) NOT NULL,
-	[name] varchar(20) NOT NULL,
-	[lastname] varchar(20) NOT NULL,
-	[birthday] date NOT NULL,
-	[language] varchar(20) NOT NULL,
-
-	CONSTRAINT [PK_VoiceActor]
-		PRIMARY KEY ([voiceActorId])
-);
-
-CREATE TABLE [Project_MAL].[Collection]
+)
+GO
+SET IDENTITY_INSERT [User] ON
+INSERT INTO [User](userId, name, age, email, sex, birthday, location, joined, familyName, userName)
+VALUES(1, 'Jarne', 'jarne.bauwens@me.com', '1998-08-18', 'Antwerpen', '2020-12-08', 'Bauwens', 'Kiritto');
+SET IDENTITY_INSERT [User] ON
+INSERT INTO [User](userId, name, age, email, sex, birthday, location, joined, familyName, userName)
+VALUES(2, 'Dennis Luyten', 'dennis.luyten@hotmail.be', '2003-02-27', 'Mechelen', '2016-03-16', 'Luyten', 'Kiiro');
+SET IDENTITY_INSERT [User] ON
+INSERT INTO [User](userId, name, age, email, sex, birthday, location, joined, familyName, userName)
+VALUES(3, 'John', 'Appleseed32@gmail.com', '2000-07-01', 'America', '2010-11-28', 'Appleseed', 'JohnA');
+SET IDENTITY_INSERT [User] ON
+INSERT INTO [User](userId, name, email, birthday, location, joined, familyName, userName)
+VALUES(4, 'Caroline', 'CarolineGorgo@hotmail.com', '1992-05-12', 'Spane', '2016-07-28', 'Gorgonzela', 'CarolineG');
+SET IDENTITY_INSERT [User] ON
+INSERT INTO [User](userId, name, email, birthday, location, joined, familyName, userName)
+VALUES(5, 'Johanna', 'Grace.Johanna@me.com.be', '2003-02-27', 'United Kingdom', '2014-09-03', 'Grace', 'JohannaG');
+CREATE TABLE Collection
 (
 	[collectionId] int IDENTITY(1,1) NOT NULL,
 	[userId] int NULL,
-	[name] varchar(40) NOT NULL,
 	CONSTRAINT [PK_Collection]
 		PRIMARY KEY ([collectionId]),
 	CONSTRAINT [FK_Gebruiker]
 		FOREIGN KEY ([userId])
-		REFERENCES [Project_MAL].[User](userId)
-);
-
-CREATE TABLE [Project_MAL].[Manga]
-(
-	[mangaId] int IDENTITY(1,1) NOT NULL,
-	[collectionId] int,
-	[authorId] int,
-	[name] varchar(40) NOT NULL,
-	[chapters] int NOT NULL,
-	[type] varchar(20) NOT NULL,
-	CONSTRAINT [PK_Manga]
-		PRIMARY KEY ([mangaId]),
-	CONSTRAINT [FK_Project_MAL_Author]
-		FOREIGN KEY ([authorId])
-		REFERENCES [Project_MAL].[Author](authorId),
-	CONSTRAINT [FK_Project_MAL_Collection]
-		FOREIGN KEY ([collectionId])
-		REFERENCES [Project_MAL].[Collection](collectionId)
-);
-
-CREATE TABLE [Project_MAL].[MangaCollection]
-(
-    [mangaCollectionId] int IDENTITY(1,1) NOT NULL,
-    [mangaId] int NULL,
-    [collectionId] int NULL,
-    CONSTRAINT [PK_MangaCollection]
-        PRIMARY KEY ([mangaCollectionId]),
-    CONSTRAINT [FK_MangaCollection]
-        FOREIGN KEY ([mangaId])
-        REFERENCES [Project_MAL].[Manga](mangaId),
-    CONSTRAINT [FK_CollectionManga]
-        FOREIGN KEY ([collectionId])
-        REFERENCES [Project_MAL].[Collection](collectionId)
-);
-
-CREATE TABLE [Project_MAL].[Studio]
+		REFERENCES [User](userId)
+)
+GO
+SET IDENTITY_INSERT Collection ON
+INSERT INTO Collection(collectionId, userId)
+VALUES(1, 1);
+SET IDENTITY_INSERT Collection ON
+INSERT INTO Collection(collectionId, userId)
+VALUES(2, 2);
+SET IDENTITY_INSERT Collection ON
+INSERT INTO Collection(collectionId, userId)
+VALUES(3, 3);
+SET IDENTITY_INSERT Collection ON
+INSERT INTO Collection(collectionId, userId)
+VALUES(4, 4);
+SET IDENTITY_INSERT Collection ON
+INSERT INTO Collection(collectionId, userId)
+VALUES(5, 5);
+CREATE TABLE Studio
 (
 	[studioId] int IDENTITY(1,1) NOT NULL,
 	[name] varchar(40) NOT NULL,
@@ -146,9 +63,37 @@ CREATE TABLE [Project_MAL].[Studio]
 	[location] varchar(40) NOT NULL,
 	CONSTRAINT [PK_Studio]
 		PRIMARY KEY ([studioId])
-);
-
-CREATE TABLE [Project_MAL].[Anime]
+)
+GO
+SET IDENTITY_INSERT Studio On
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 1, '8bit', '8bit', 'Suginami');
+SET IDENTITY_INSERT Studio ON
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 2, 'Madhouse', 'Masao Maruyama', n'Honchō');
+SET IDENTITY_INSERT Studio ON
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 3, 'Toei Animation', n'Kenzō Masaoka', 'Oizumi');
+SET IDENTITY_INSERT Studio ON
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 4, 'Studio Pierrot', 'Studio Pierrot', 'Mitaka');
+SET IDENTITY_INSERT Studio ON
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 5, 'TMS Entertainment', 'Sega Sammy Holdings', 'Nakano');
+SET IDENTITY_INSERT Studio ON
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 6, 'Production I.G', 'Mitsuhisa Ishikawa', 'Kokubunji');
+SET IDENTITY_INSERT Studio ON
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 7, 'Gallop', 'Akio Wakana', 'Nerima');
+SET IDENTITY_INSERT Studio ON
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 8, 'Bones', 'Masahiko Minami', ' Suginami');
+SET IDENTITY_INSERT Studio ON
+INSERT INTO Studio(studioId, name, producer, location)
+VALUES( 9, 'Ufotable', 'Hikaru Kondo', ' Nakano');
+GO
+CREATE TABLE Anime
 (
 	[animeId] int IDENTITY(1,1) NOT NULL,
 	[studioId] int NULL,
@@ -163,57 +108,96 @@ CREATE TABLE [Project_MAL].[Anime]
 		PRIMARY KEY ([animeId]),
 	CONSTRAINT [FK_Studio]
 		FOREIGN KEY ([studioId])
-		REFERENCES [Project_MAL].[Studio](studioId),
-);
-
-CREATE TABLE [Project_MAL].[Genre]
+		REFERENCES [Studio](studioId)
+)
+GO
+SET IDENTITY_INSERT Anime on
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 1, 1, 'That Time I Got Reincarnated as a Slime', 24, '2018-10-02', 'finished airing', 23, 8.08, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 2, 2, 'Overlord', 13, '2015-07-07', 'finished airing', 24, 7.95, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 3, 3, 'One Piece', 967, '1999-10-20', 'airing', 24, 8.53, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 4, 4, 'Naruto', 220, '2002-10-03', 'finished airing', 23, 7.91, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 5, 5, 'Detective Conan', 998, '1996-01-08', 'airing', 25, 8.16, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 6, 6, 'Haikyuu', 25, '2014-04-06', 'finished airing', 24, 8.54, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 7, 7, 'Yu-Gi-Oh! 5Ds', 154, '2008-04-02', 'finished airing', 24, 7.41, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 8, 8, 'Fullmetal Alchemist', 51, '2003-10-04', 'finished airing', 24, 8.16, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 9, 9, 'Demon Slayer: Kimetsu no Yaiba', 26, '2019-04-06', 'finished airing', 23, 8.61, 'TV');
+SET IDENTITY_INSERT Anime ON
+INSERT INTO Anime(animeId, studioId, name, episodes, aired, status, duration, rating, type)
+VALUES( 10, 4, 'Bleach', 26, '2004-10-05', 'finished airing', 24, 7.80, 'TV');
+CREATE TABLE Genre
 (
 	[genreId] int IDENTITY(1,1) NOT NULL,
-	[mangaGenreId] int NULL,
-	[animeGenreId] int NULL,
 	[nameGenre] varchar(100) NOT NULL,
 	CONSTRAINT [PK_Genre]
 		PRIMARY KEY ([genreId]),
-);
-
-
-CREATE TABLE [Project_MAL].[Character]
-(
-	[characterId] int IDENTITY(1,1) NOT NULL,
-	[animeId] int,
-	[mangaId] int,
-	[name] varchar(20) NOT NULL,
-	[lastname] varchar(20) NULL,
-	[appearance] varchar(20) NOT NULL,
-	[age] int NOT NULL,
-	[bloodtype] varchar(20),
-	CONSTRAINT [PK_Character]
-		PRIMARY KEY ([characterId]),
-	CONSTRAINT [FK_Project_MAL_Anime]
-		FOREIGN KEY ([animeId])
-		REFERENCES [Project_MAL].[Anime](animeId),
-	CONSTRAINT [FK_Project_MAL_Manga]
-		FOREIGN KEY ([mangaId])
-		REFERENCES [Project_MAL].[Manga](mangaId)
-);
-
-CREATE TABLE [Project_MAL].[VoiceActorAired]
-(
-	[voiceActorAiredId] int IDENTITY(1,1) NOT NULL,
-	[characterId] int,
-	[voiceActorId] int,
-	[date] date NOT NULL,
-	CONSTRAINT [PK_VoiceActorAired]
-		PRIMARY KEY ([voiceActorAiredId]),
-	CONSTRAINT [FK_Project_MAL_Character]
-		FOREIGN KEY ([characterId])
-		REFERENCES [Project_MAL].[Character](characterId),
-	CONSTRAINT [FK_Project_MAL_VoiceActor]
-		FOREIGN KEY ([voiceActorId])
-		REFERENCES [Project_MAL].[VoiceActor](VoiceActorId)
-);
-
-CREATE TABLE [Project_MAL].[AnimeCollection]
+)
+Go
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(1, 1, null, 'Action, Adventure, Martial Arts, Shounen, Super Power');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(2, 2, 8, 'Action, Adventure, Comedy, Drama, Shounen, Military');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(3, 3, null, 'Action, Comedy, Fantasy, Magic, Shounen');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(4, 3, null, 'Action, Adventure, Comedy, Drama, Sci-Fi, Shounen, Supernatural');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(5, 5, null, 'Action, Adventure, Fantasy, Horror, Shounen');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(6, 6, 10, 'Action, Adventure, Shounen, Super Power, Supernatural');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(7, 7, 9, 'Action, Demons, Historical, Shounen, Supernatural');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(8, 8, null, 'Action, Adventure, Comedy, Shounen, Super Power, Supernatural');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(9, 9, null, 'Fantasy, Shounen');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(10, 10, null, 'Action, Adventure, Comedy, Martial Arts, Sci-Fi, Shounen, Super Power');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(9, null, 1, 'Fantasy, Shounen');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(10, null, 2, 'Action, Adventure, Fantasy, Game, Magic, Supernatural');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(11, null, 3, 'Action, Adventure, Comedy, Martial Arts, Drama, Shounen, Fantasy, Super Power');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(12, null, 5, 'Adventure, Mystery, Comedy, Police, Shounen');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(13, null, 6, 'Comedy, Sport, Drama, School, Shounen');
+SET IDENTITY_INSERT Project_MAL.Genre ON
+INSERT INTO Project_MAL.Genre(genreId, mangaGenreId, animeGenreId, nameGenre)
+VALUES(14, null, 4, 'Action, Adventure, Comedy, Shounen, Super Power, Supernatural');
+CREATE TABLE AnimeCollection
 (
 	[animeCollectionId] int IDENTITY(1,1) NOT NULL,
 	[animeId] int NULL,
@@ -225,25 +209,10 @@ CREATE TABLE [Project_MAL].[AnimeCollection]
 		REFERENCES [Project_MAL].[Anime](animeId),
 	CONSTRAINT [FK_Collection]
 		FOREIGN KEY ([collectionId])
-		REFERENCES [Project_MAL].[Collection](collectionId)
-);
-
-CREATE TABLE [Project_MAL].[MangaGenre]
-(
-	[mangaGenreId] int IDENTITY(1,1) NOT NULL,
-	[mangaId] int NOT NULL,
-	[genreId] int NULL,
-	CONSTRAINT [PK_MangaGenre]
-		PRIMARY KEY ([mangaGenreId]),
-	CONSTRAINT [FK_GenreManga]
-		FOREIGN KEY ([mangaId])
-		REFERENCES [Project_MAL].[Manga](mangaId),
-	CONSTRAINT [FK_Genre]
-		FOREIGN KEY ([genreId])
-		REFERENCES [Project_MAL].[Genre](genreId)
-);
-
-CREATE TABLE [Project_MAL].[AnimeGenre]
+		REFERENCES [Collection](collectionId)
+)
+GO
+CREATE TABLE AnimeGenre
 (
 	[animeGenreId] int IDENTITY(1,1) NOT NULL,
 	[animeId] int NOT NULL,
@@ -252,20 +221,39 @@ CREATE TABLE [Project_MAL].[AnimeGenre]
 		PRIMARY KEY ([animeGenreId]),
 	CONSTRAINT [FK_GenreAnime]
 		FOREIGN KEY ([animeId])
-		REFERENCES [Project_MAL].[Anime](animeId),
+		REFERENCES [Anime](animeId),
 	CONSTRAINT [FK_GenreGenre]
 		FOREIGN KEY ([genreId])
-		REFERENCES [Project_MAL].[Genre](genreId)
-);
-
-CREATE TABLE [Project_MAL].[NumberOfViews]
-(
-	[numberOfViewsId] int IDENTITY(1,1) NOT NULL,
-	[animeId] int NOT NULL,
-	[views] date NOT NULL,
-	CONSTRAINT [PK_NumberOfViews]
-		PRIMARY KEY ([numberOfViewsId]),
-	CONSTRAINT [FK_AnimeGenre]
-		FOREIGN KEY ([animeId])
-		REFERENCES [Project_MAL].[Anime](animeId),
-);
+		REFERENCES [Genre](genreId)
+)
+GO
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(1, 1, 9);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(2, 2, 10);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(3, 3, 11);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(4, 4, 14);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(5, 5, 12);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(6, 6, 13);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(7, 7, null);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(8, 8, 2);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(9, 9, 9);
+SET IDENTITY_INSERT AnimeGenre on
+INSERT INTO AnimeGenre(animeGenreId, animeId, genreId)
+VALUES(10, 10, 6);

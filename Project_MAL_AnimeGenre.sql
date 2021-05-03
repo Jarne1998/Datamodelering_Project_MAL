@@ -1,5 +1,3 @@
--- ik weet niet hoe ik meerdere genre id kan toevoegen.
-
 -- 1
 SET IDENTITY_INSERT Project_MAL.AnimeGenre on
 INSERT INTO Project_MAL.AnimeGenre(animeGenreId, animeId, genreId)
