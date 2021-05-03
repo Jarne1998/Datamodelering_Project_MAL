@@ -2,9 +2,7 @@ CREATE TABLE [User]
 (
 	[userId] int IDENTITY(1,1) NOT NULL,
 	[name] varchar(20) NOT NULL,
-	[age] int NOT NULL,
 	[email] varchar(40) NOT NULL,
-	[sex] varchar(20) NULL,
 	[birthday] date NOT NULL,
 	[location] varchar(40) NULL,
 	[joined] date NOT NULL,
@@ -15,13 +13,13 @@ CREATE TABLE [User]
 )
 GO
 SET IDENTITY_INSERT [User] ON
-INSERT INTO [User](userId, name, age, email, sex, birthday, location, joined, familyName, userName)
+INSERT INTO [User](userId, name, email, birthday, location, joined, familyName, userName)
 VALUES(1, 'Jarne', 'jarne.bauwens@me.com', '1998-08-18', 'Antwerpen', '2020-12-08', 'Bauwens', 'Kiritto');
 SET IDENTITY_INSERT [User] ON
-INSERT INTO [User](userId, name, age, email, sex, birthday, location, joined, familyName, userName)
+INSERT INTO [User](userId, name, email, birthday, location, joined, familyName, userName)
 VALUES(2, 'Dennis Luyten', 'dennis.luyten@hotmail.be', '2003-02-27', 'Mechelen', '2016-03-16', 'Luyten', 'Kiiro');
 SET IDENTITY_INSERT [User] ON
-INSERT INTO [User](userId, name, age, email, sex, birthday, location, joined, familyName, userName)
+INSERT INTO [User](userId, name, email, birthday, location, joined, familyName, userName)
 VALUES(3, 'John', 'Appleseed32@gmail.com', '2000-07-01', 'America', '2010-11-28', 'Appleseed', 'JohnA');
 SET IDENTITY_INSERT [User] ON
 INSERT INTO [User](userId, name, email, birthday, location, joined, familyName, userName)
