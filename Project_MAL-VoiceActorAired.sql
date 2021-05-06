@@ -47,3 +47,7 @@ VALUES(9, 9, 8, '1986-05-08');
 SET IDENTITY_INSERT Project_MAL.VoiceActorAired on
 INSERT INTO Project_MAL.VoiceActorAired(voiceActorAiredId, characterId, voiceActorId, date)
 VALUES(10, 10, 9, '1970-09-13');
+
+SET IDENTITY_INSERT Project_MAL.VoiceActorAired on
+INSERT INTO Project_MAL.VoiceActorAired(voiceActorAiredId, characterId, voiceActorId, date)
+VALUES(10, 10, 9, '1971-10-13');
