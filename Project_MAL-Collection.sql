@@ -1,23 +1,22 @@
 -- GPR LTI d1.1 Jarne Bauwens & Dennis Luyten
 -- Opvullen van Collection table
 
--- 1)
 SET IDENTITY_INSERT Project_MAL.Collection ON
-INSERT INTO Project_MAL.Collection(collectionId, userId)
-VALUES(1, 1);
+INSERT INTO Project_MAL.Collection(collectionId, userId, name)
+VALUES(1, 1, 'AnimeLijst1');
 
 SET IDENTITY_INSERT Project_MAL.Collection ON
-INSERT INTO Project_MAL.Collection(collectionId, userId)
-VALUES(2, 2);
+INSERT INTO Project_MAL.Collection(collectionId, userId, name)
+VALUES(2, 2, 'AnimeLijst2');
 
 SET IDENTITY_INSERT Project_MAL.Collection ON
-INSERT INTO Project_MAL.Collection(collectionId, userId)
-VALUES(3, 3);
+INSERT INTO Project_MAL.Collection(collectionId, userId, name)
+VALUES(3, 3, 'AnimeLijst3');
 
 SET IDENTITY_INSERT Project_MAL.Collection ON
-INSERT INTO Project_MAL.Collection(collectionId, userId)
-VALUES(4, 4);
+INSERT INTO Project_MAL.Collection(collectionId, userId, name)
+VALUES(4, 4, 'AnimeLijst4');
 
 SET IDENTITY_INSERT Project_MAL.Collection ON
-INSERT INTO Project_MAL.Collection(collectionId, userId)
-VALUES(5, 5);
+INSERT INTO Project_MAL.Collection(collectionId, userId, name)
+VALUES(5, 5, 'AnimeLijst5');
