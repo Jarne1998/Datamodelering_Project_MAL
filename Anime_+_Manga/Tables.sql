@@ -64,7 +64,7 @@ CREATE TABLE [Project_MAL_Anime_Manga].[User]
 	[birthday] date NOT NULL,
 	[location] varchar(40) NULL,
 	[joined] date NOT NULL,
-	[familiename] varchar(40) NOT NULL,
+	[familyname] varchar(40) NOT NULL,
 	[username] varchar(40) NOT NULL,
 	CONSTRAINT [PK_User]
 		PRIMARY KEY ([userId])
